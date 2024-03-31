@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report An Issue</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      /* position: relative;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f2f2f2; */
+      /* background: #353935; */
+    }
+
+    section#home.home{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container {
+      background: #fff;
+      padding: 20px;
+      font-family: monospace;
+      /* width: 500px; */
+      box-shadow: 0 0 5px #000;
+      margin-top: 10vh;
+    }
+
+    .head {
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .text {
+      margin: 10px 0;
+      font-family: sans-serif;
+      font-size: 0.9em;
+    }
+
+    .commentbox {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+    }
+
+    .commentbox > img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      /* float: left; */
+      margin-right: 20px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .content {
+      width: 100%;
+    }
+
+    .user {
+      border: none;
+      outline: none;
+      margin: 5px 0;
+      color: #808080;
+      margin-left: 20px;
+      padding: 10px;
+    }
+
+    .commentinput > input {
+      border: none;
+      padding: 10px;
+      padding-left: 0;
+      outline: none;
+      border-bottom: 2px solid blue;
+      margin-bottom: 10px;
+      width: 95%;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #808080;
+    }
+
+    .buttons > button {
+      padding: 5px 10px;
+      background: lightgrey;
+      color: #808080;
+      text-transform: uppercase;
+      border: none;
+      outline: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .buttons > button.abled {
+      background: blue;
+      color: #fff;
+    }
+
+    .policy {
+      margin: 20px 0;
+      font-size: 0.8em;
+      font-family: Arial, sans-serif;
+      color: #808080;
+    }
+
+    .policy a {
+      text-decoration: none;
+      color: blue;
+    }
+
+    .notify {
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .notify > input {
+      margin-right: 5px;
+      border: 2px solid #808080;
+    }
+
+    .parents {
+      font-family: Arial, sans-serif;
+      display: flex;
+      margin-bottom: 30px;
+    }
+
+    .parents h1 {
+      font-size: 0.9em;
+    }
+
+    .parents p {
+      margin: 10px 0;
+      font-size: 0.9em;
+    }
+
+    .parents > img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 20px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .engagements {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .engagements img {
+      width: 20px;
+    }
+
+    .engagements img:nth-child(1) {
+      margin-right: 10px;
+      width: 25px;
+    }
+
+    .date {
+      color: #808080;
+      font-size: 0.8em;
+    }
+  </style>
+
+    
+    <header class="header">
+        <div class="logoContent">
+            <a href="#" class="logo"><img src="public/logo.png" alt=""></a>
+            <h1 class="logoName">MDM-connect </h1>
+        </div>
+
+        <nav class="navbar">
+          <a href="#home">HOME</a>
+          <a href="#product">DOCS</a>
+          <a href="#blogs">BLOGS</a>
+          <a href="#review">REVIEW</a>
+          <a href="#contact">CONTACT</a>
+            <!-- <a href="report.html">report</a> -->
+        </nav>
+
+        <div class="icon">
+            <i class="fas fa-search" id="search"></i>
+            <i class="fas fa-bars" id="menu-bar"></i>
+        </div>
+
+        <div class="search">
+            <input type="search" placeholder="search...">
+        </div>
+    </header>
+    <!-- header section end here  -->
+
+    <!-- home section start here  -->
+    <section class="home" id="home">
+        <div class="homeContent">
+            <!-- <h2>Healthy Mid-Day-Meal </h2>
+            <p>For our kids of the schools across the country . adipisicing elit. Eum excepturi doloribus, fuga quod
+                deserunt
+                recusandae?</p> -->
+            <div class="home-btn">
+                <a href="#"><button>see more</button></a>
+            </div>
+
+            <div class="container">
+                <div class="head"><h1>Suggest your Report</h1></div>
+                <div><span id="comment">0</span> Reports</div>
+                <div class="text"><p>We will Review That</p></div>
+                <div class="comments"></div>
+                <div class="commentbox">
+                    <img src="user1.png" alt="" />
+                    <div class="content">
+                        <h2>Report as:</h2>
+                        <input type="text" value="Anonymous" class="user" style="border: 1px solid black" />
+                        <div class="commentinput">
+                            <input type="text" placeholder="Enter comment" class="usercomment" />
+                            <div class="buttons">
+                                <button type="submit" disabled id="publish">Report</button>
+                                <div class="notify">
+                                    <input type="checkbox" class="notifyinput" />
+                                    <span>Notify me</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="policy">
+                            This site is procted by reCAPTCHA and the Google
+                            <a href="">privacy policy</a> and
+                            <a href="">Terms of Service</a> apply.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+      // Initialize Firebase
+      var firebaseConfig = {
+          apiKey: "AIzaSyCANok8a-WeWLs37Bdm7tvbCyt-xf0QRyM",
+          authDomain: "demosavedata-48b10.firebaseapp.com",
+          databaseURL: "https://demosavedata-48b10-default-rtdb.firebaseio.com",
+          projectId: "demosavedata-48b10",
+          storageBucket: "demosavedata-48b10.appspot.com",
+          messagingSenderId: "557400123799",
+          appId: "1:557400123799:web:551725a6a27e9708f77cd2"
+      };
+      firebase.initializeApp(firebaseConfig);
+  
+      const database = firebase.database();
+  
+      const USERID = {
+          name: null,
+          identity: null,
+          image: null,
+          message: null,
+          date: null,
+      };
+  
+      const userComment = document.querySelector(".usercomment");
+      const publishBtn = document.querySelector("#publish");
+      const comments = document.querySelector(".comments");
+      const userName = document.querySelector(".user");
+      const notify = document.querySelector(".notifyinput");
+  
+      userComment.addEventListener("input", (e) => {
+          if (!userComment.value) {
+              publishBtn.setAttribute("disabled", "disabled");
+              publishBtn.classList.remove("abled");
+          } else {
+              publishBtn.removeAttribute("disabled");
+              publishBtn.classList.add("abled");
+          }
+      });
+  
+      function addPost() {
+          if (!userComment.value) return;
+  
+          USERID.name = userName.value;
+          if (USERID.name === "Anonymous") {
+              USERID.identity = false;
+              USERID.image = "anonymous.png";
+          } else {
+              USERID.identity = true;
+              USERID.image = "user.png";
+          }
+  
+          const name = userName.value;
+          const identity = (name === "Anonymous") ? false : true;
+          const image = identity ? "user.png" : "anonymous.png";
+          const message = userComment.value;
+          const date = new Date().toLocaleString();
+  
+          USERID.message = userComment.value;
+          USERID.date = new Date().toLocaleString();
+  
+          // Push the reported data to Firebase
+          database.ref('reports').push({
+              name: USERID.name,
+              identity: USERID.identity,
+              image: USERID.image,
+              message: USERID.message,
+              date: USERID.date
+          });
+  
+          // Clear the existing comments
+          comments.innerHTML = '';
+  
+          // Retrieve reports from Firebase and display them
+          database.ref('reports').once('value', function(snapshot) {
+              snapshot.forEach(function(childSnapshot) {
+                  let report = childSnapshot.val();
+                  let published = `<div class="parents">
+                      <img src="${report.image}">
+                      <div>
+                          <h1>${report.name}</h1>
+                          <p>${report.message}</p>
+                          <div class="engagements"><img src="like.png" id="like"><img src="share.png" alt=""></div>
+                          <span class="date">${report.date}</span>
+                      </div>    
+                  </div>`;
+                  comments.innerHTML += published;
+              });
+          });
+  
+          // Clear input field and disable button after posting
+          userComment.value = "";
+          publishBtn.classList.remove("abled");
+          publishBtn.setAttribute("disabled", "disabled");
+      }
+  
+      publishBtn.addEventListener("click", addPost);
+  
+      // Display initial reports on page load
+      window.onload = function() {
+          database.ref('reports').once('value', function(snapshot) {
+              snapshot.forEach(function(childSnapshot) {
+                  let report = childSnapshot.val();
+                  let published = `<div class="parents">
+                      <img src="${report.image}">
+                      <div>
+                          <h1>${report.name}</h1>
+                          <p>${report.message}</p>
+                          <div class="engagements"><img src="like.png" id="like"><img src="share.png" alt=""></div>
+                          <span class="date">${report.date}</span>
+                      </div>    
+                  </div>`;
+                  comments.innerHTML += published;
+              });
+          });
+      };
+  </script>
+  
+</body>
+</html>

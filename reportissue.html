@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report Issue</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Report Issue</h1>
+    <form id="reportForm">
+      <textarea id="issueText" placeholder="Report Issue"></textarea>
+      <input type="submit" value="Submit Proof" id="submitProofBtn">
+    </form>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="fileDropArea" class="file-drop-area">
+        <p>Drag and drop files here or click to browse</p>
+        <input type="file" id="fileInput" multiple>
+      </div>
+    </div>
+  </div>
+
+<script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyBfq_kmFKKkXfYV51oUvBsp64D__XM2MNA",
+    authDomain: "report-91adc.firebaseapp.com",
+    projectId: "report-91adc",
+    storageBucket: "report-91adc.appspot.com",
+    messagingSenderId: "267447906756",
+    appId: "1:267447906756:web:427e839e2042e4b9407491",
+    measurementId: "G-Z9LQMXNBN9"
+  };
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  firebase.initializeApp(firebaseConfig);
+
+  // Get a reference to the database service
+  const database = firebase.database();
+
+  // Modal functionality
+  const modal = document.getElementById('modal');
+  const fileDropArea = document.getElementById('fileDropArea');
+  const fileInput = document.getElementById('fileInput');
+  const submitProofBtn = document.getElementById('submitProofBtn');
+
+  submitProofBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
+
+  // Close the modal when clicking on the close button
+  const closeBtn = document.getElementsByClassName('close')[0];
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  // Close the modal when clicking outside of it
+  window.addEventListener('click', (event) => {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  });
+
+  // Prevent default behavior for drag and drop events
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    fileDropArea.addEventListener(eventName, preventDefaults, false);
+    document.body.addEventListener(eventName, preventDefaults, false);
+  });
+
+  // Highlight drop area when a file is dragged over it
+  ['dragenter', 'dragover'].forEach(eventName => {
+    fileDropArea.addEventListener(eventName, highlight, false);
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    fileDropArea.addEventListener(eventName, unhighlight, false);
+  });
+
+  // Handle dropped files
+  fileDropArea.addEventListener('drop', handleDrop, false);
+
+  function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  function highlight() {
+    fileDropArea.classList.add('highlight');
+  }
+
+  function unhighlight() {
+    fileDropArea.classList.remove('highlight');
+  }
+
+  function handleDrop(e) {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+
+    handleFiles(files);
+  }
+
+  function handleFiles(files) {
+    [...files].forEach(uploadFile);
+  }
+
+  function uploadFile(file) {
+    // Upload file to Google Drive (you will need to implement this part)
+    console.log('Uploading file:', file.name);
+  }
+
+  // Firebase integration
+  const reportForm = document.getElementById('reportForm');
+  const issueText = document.getElementById('issueText');
+
+  reportForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Store issue in Firebase
+    const issue = issueText.value;
+    if (issue.trim() !== '') {
+      const newIssueRef = database.ref('issues').push();
+      newIssueRef.set({
+        issue: issue
+      })
+      .then(() => {
+        console.log('Issue reported successfully');
+        issueText.value = '';
+        modal.style.display = 'none';
+      })
+      .catch((error) => {
+        console.error('Error reporting issue:', error);
+      });
+    } else {
+      alert('Please enter an issue before submitting.');
+    }
+  });
+
+</script>
+</body>
+</html>

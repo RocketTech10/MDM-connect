@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+        <style>
+            
+        h2#greet{
+            position: relative;
+            font-size: 2rem;
+            margin-top: 5vh;
+            margin-bottom: 0;
+        }
+
+        h3{
+            font-size: 2rem;
+        }
+        </style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDM-connect</title>
+
+    <!-- swiper link  -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- cdn icon link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- custom css file  -->
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+</head>
+
+<body>
+
+    <!-- header section start here  -->
+    <header class="header">
+        <div class="logoContent">
+            <a href="#" class="logo"><img src="public/logo.png" alt=""></a>
+            <h1 class="logoName">MDM-connect </h1>
+        </div>
+
+        <nav class="navbar">
+            <a href="#home">HOME</a>
+            <a href="#product">DOCS</a>
+            <a href="#blogs">BLOGS</a>
+            <a href="#review">REVIEW</a>
+            <a href="#contact">CONTACT</a>
+            <a href="reportforuser.html">REPORT ISSUE</a>
+        </nav>
+        <form class="d-flex">
+
+            <button class="btn btn-outline-success" type="submit" id="signoutbutton">
+              Sign Out 
+            </button>
+          </form>
+        <div class="icon">
+            <i class="fas fa-search" id="search"></i>
+            <i class="fas fa-bars" id="menu-bar"></i>
+        </div>
+
+        <div class="search">
+            <input type="search" placeholder="search...">
+        </div>
+    </header>
+    <!-- header section end here  -->
+
+    <!-- home section start here  -->
+    <section class="home" id="home">
+        <div class="homeContent">
+            <h2>Healthy Mid Day Meal <br>
+            </h2>
+            
+            <p>For our kids of the schools across the country . adipisicing elit. Eum excepturi doloribus, fuga quod
+                deserunt
+                recusandae?</p>
+            <div class="home-btn">
+                <a href="#"><button>see more</button></a>
+                <h2 id="greet"></h2>
+                <h3>Thanks for being the responsible citizen</h3>
+            </div>
+        </div>
+        <h2 id="greet"></h2>
+        
+    
+    </section>
+
+
+    <!-- home section end here  -->
+
+
+    <!-- transaction section -->
+
+
+    <section class="second">
+        <!-- <div class="all"> -->
+        <!-- <h1>Transaction</h1>
+        <div class="fromplusimg">
+            <form id="transferForm">
+                <label for="contractAddress">Sender Address:</label>
+                <input type="text" id="contractAddress" name="contractAddress"><br><br>
+                <label for="receiver">Receiver Address:</label>
+                <input type="text" id="receiver" name="receiver"><br><br>
+                <label for="amount">Amount (Ether):</label>
+                <input type="number" id="amount" name="amount" step="0.0001"><br><br>
+                <label for="message">Message:</label>
+                <input type="text" id="message" name="message"><br><br>
+                <div class="transfer"><button class="transfer" type="submit">Transfer Ether</button></div>
+            </form>
+            <img class="form" src="public/form.jpg" alt="">
+        </div>
+        <div id="transferResult"></div> -->
+
+        <br>
+        <h2>Transaction History</h2>
+        <table id="transactionTable">
+            <thead>
+                <tr>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Amount (Ether)</th>
+                    <th>Amount (Rupees)</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody id="transactionHistory">
+            </tbody>
+        </table>
+
+    </section>
+
+
+    <!-- transaction section ends here -->
+
+
+    <section class="newsletter">
+        <a href="memechat/index.html" class="gotochat"><button class="gotochat"><img src="public/community.png" alt=""> Go to community chatroom</button></a>
+    </section>
+
+
+    <!-- product section start here  -->
+    <section class="product" id="product">
+        <div class="heading">
+            <h2>read important documents related mid-day-meal scheme</h2>
+        </div>
+        <div class="swiper product-row">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide box">
+                    <div class="img">
+                        <img src="public/detail6.jpeg" alt="">
+                    </div>
+                    <div class="product-content">
+                        <h3>docs</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa adipisci reiciendis assumenda.
+                        </p>
+                        <div class="orderNow">
+                            <button><a href="docsforcitizens.html">View Document </a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide box">
+                    <div class="img">
+                        <img src="public/detail5.jpeg" alt="">
+                    </div>
+                    <div class="product-content">
+                        <h3>docs</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa adipisci reiciendis assumenda.
+                        </p>
+                        <div class="orderNow">
+                            <button><a href="docsforcitizens.html">View Document </a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide box">
+                    <div class="img">
+                        <img src="public/detail6.jpeg" alt="">
+                    </div>
+                    <div class="product-content">
+                        <h3>docs</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa adipisci reiciendis assumenda.
+                        </p>
+                        <div class="orderNow">
+                            <button><a href="docsforcitizens.html">View Document </a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide box">
+                    <div class="img">
+                        <img src="public/detail5.jpeg" alt="">
+                    </div>
+                    <div class="product-content">
+                        <h3>docs</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa adipisci reiciendis assumenda.
+                        </p>
+                        <div class="orderNow">
+                            <button><a href="docsforcitizens.html">View Document </a></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="swiper product-row">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide box">
+                    <div class="img">
+                        <img src="public/detail3.jpg" alt="">
+                    </div>
+                    <div class="product-content">
+                        <h3>docs</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa adipisci reiciendis assumenda.
+                        </p>
+                        <div class="orderNow">
+                            <button><a href="docsforcitizens.html">View Document </a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide box">
+                    <div class="img">
+                        <img src="public/detail.jpg" alt="">
+                    </div>
+                    <div class="product-content">
+                        <h3>docs</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa adipisci reiciendis assumenda.
+                        </p>
+                        <div class="orderNow">
+                            <button><a href="docsforcitizens.html">View Document </a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide box">
+                    <div class="img">
+                        <img src="public/detail3.jpg" alt="">
+                    </div>
+                    <div class="product-content">
+                        <h3>docs</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa adipisci reiciendis assumenda.
+                        </p>
+                        <div class="orderNow">
+                            <button><a href="docsforcitizens.html">View Document </a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide box">
+                    <div class="img">
+                        <img src="public/detail.jpg" alt="">
+                    </div>
+                    <div class="product-content">
+                        <h3>docs</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa adipisci reiciendis assumenda.
+                        </p>
+                        <div class="orderNow">
+                            <button><a href="docsforcitizens.html">View Document </a></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- product section end here  -->
+
+    <!-- blogs section start here  -->
+    <section class="blogs" id="blogs">
+
+        <div class=" swiper blogs-row">
+            <div class="swiper-wrapper">
+                <div class=" swiper-slide box">
+                    <div class="img">
+                        <img src="public/midd3.png" alt="">
+                    </div>
+                    <div class="content">
+                        <h3>Caramel Bourbon Vanilla Cupcakes </h3>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi dolorum voluptatum
+                            corporis accusamus aperiam fugiat tempora blanditiis labore dolor aliquid maxime nobis
+                            laborum sed soluta voluptatibus aspernatur natus, dicta quisquam.</p>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam ab ullam reiciendis sint
+                            eaque at.</p>
+                        <a href="#blogs" class="btn">learn more</a>
+                    </div>
+                </div>
+                <div class=" swiper-slide box">
+                    <div class="img">
+                        <img src="public/mid2.jpg" alt="">
+                    </div>
+                    <div class="content">
+                        <h3>Caramel Bourbon Vanilla Cupcakes </h3>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi dolorum voluptatum
+                            corporis accusamus aperiam fugiat tempora blanditiis labore dolor aliquid maxime nobis
+                            laborum sed soluta voluptatibus aspernatur natus, dicta quisquam.</p>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam ab ullam reiciendis sint
+                            eaque at.</p>
+                        <a href="#blogs" class="btn">learn more</a>
+                    </div>
+                </div>
+                <div class=" swiper-slide box">
+                    <div class="img">
+                        <img src="public/mid2.jpeg" alt="">
+                    </div>
+                    <div class="content">
+                        <h3>Caramel Bourbon Vanilla Cupcakes </h3>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi dolorum voluptatum
+                            corporis accusamus aperiam fugiat tempora blanditiis labore dolor aliquid maxime nobis
+                            laborum sed soluta voluptatibus aspernatur natus, dicta quisquam.</p>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam ab ullam reiciendis sint
+                            eaque at.</p>
+                        <a href="#blogs" class="btn">learn more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+
+
+        </div>
+    </section>
+
+    <!-- blogs section ends here  -->
+
+    <!-- newsletter section start here  -->
+
+    <!-- <section class="newsletter">
+        <form action="">
+            <h3>subscribe for latest update</h3>
+            <input type="email" name="" placeholder="enter your email" id="" class="box">
+            <input type="button" value="subscribe" class="box2">
+        </form>
+    </section> -->
+    <!-- newsletter section ends here  -->
+
+    <!-- review section start here  -->
+    <section class="review" id="review">
+        <div class="heading">
+            <h2>reviews</h2>
+        </div>
+
+
+        <div class=" swiper review-row">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide box">
+                    <div class="client-review">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident, perferendis architecto
+                            quasi eveniet aliquam sed?</p>
+                    </div>
+                    <div class="client-info">
+                        <div class="img">
+                            <img src="images/client1.jpg" alt="">
+                        </div>
+                        <div class="clientDetailed">
+                            <h3>Popat lal</h3>
+                            <p>Villager 1</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide box">
+                    <div class="client-review">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident, perferendis architecto
+                            quasi eveniet aliquam sed?</p>
+                    </div>
+                    <div class="client-info">
+                        <div class="img">
+                            <img src="images/client1.jpg" alt="">
+                        </div>
+                        <div class="clientDetailed">
+                            <h3>Hardy Devid</h3>
+                            <p>Villager 2</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide box">
+                    <div class="client-review">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident, perferendis architecto
+                            quasi eveniet aliquam sed?</p>
+                    </div>
+                    <div class="client-info">
+                        <div class="img">
+                            <img src="images/client1.jpg" alt="">
+                        </div>
+                        <div class="clientDetailed">
+                            <h3>Champak</h3>
+                            <p>Villager 3</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide box">
+                    <div class="client-review">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident, perferendis architecto
+                            quasi eveniet aliquam sed?</p>
+                    </div>
+                    <div class="client-info">
+                        <div class="img">
+                            <img src="images/client1.jpg" alt="">
+                        </div>
+                        <div class="clientDetailed">
+                            <h3>Swati Sarkar</h3>
+                            <p>Villager 4</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+
+            </div>
+        </div>
+    </section>
+    <!-- review section ends here  -->
+
+    <!-- footer section start here  -->
+
+    <footer class="footer" id="contact">
+        <div class="box-container">
+            <div class="mainBox">
+                <div class="content">
+                    <a href="#"><img class="logo" src="public/logo.png" alt=""></a>
+                    <h1 class="logoName"> MDM-connect </h1>
+                </div>
+
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta accusamus maxime quod.</p>
+
+            </div>
+            <div class="box">
+                <h3>Quick link</h3>
+                <a href="#"> <i class="fas fa-arrow-right"></i>Home</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>product</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>blogs</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>review</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>contact</a>
+
+            </div>
+            <div class="box">
+                <h3>Extra link</h3>
+                <a href="#"> <i class="fas fa-arrow-right"></i>Account info</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>order item</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>privacy policy</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>payment method</a>
+                <a href="#"> <i class="fas fa-arrow-right"></i>our services</a>
+            </div>
+            <div class="box">
+                <h3>Contact Info</h3>
+                <a href="#"> <i class="fas fa-phone"></i>+91 12222 34444</a>
+                <a href="#"> <i class="fas fa-envelope"></i>CodeCrafters@gmail.com</a>
+
+            </div>
+
+        </div>
+        <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin"></a>
+            <a href="#" class="fab fa-pinterest"></a>
+        </div>
+        <div class="credit">
+            created by <span>Team CodeCrafters..... </span> | Made for the Agnethon 2024 |
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+    <!-- swiper js link  -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- custom js file  -->
+    <script src="index.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+    <script>
+        window.addEventListener('load', async () => {
+            if (window.ethereum) {
+                window.web3 = new Web3(window.ethereum);
+                await window.ethereum.enable();
+            } else if (window.web3) {
+                window.web3 = new Web3(window.web3.currentProvider);
+            } else {
+                console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+            }
+
+            // Listen for changes in the Firebase database
+            database.ref('transactions').on('value', (snapshot) => {
+                const transactions = snapshot.val();
+                transactionHistory.innerHTML = ''; // Clear the existing table content
+
+                // Loop through the transactions and populate the table
+                for (let key in transactions) {
+                    const transaction = transactions[key];
+                    const newRow = transactionHistory.insertRow();
+                    newRow.insertCell(0).textContent = transaction.sender;
+                    newRow.insertCell(1).textContent = transaction.receiver;
+                    newRow.insertCell(2).textContent = transaction.amount;
+                    newRow.insertCell(3).textContent = transaction.amountInRupees;
+                    newRow.insertCell(4).textContent = transaction.message;
+                }
+            });
+
+        });
+
+        // Initialize Firebase
+        var firebaseConfig = {
+            apiKey: "AIzaSyCANok8a-WeWLs37Bdm7tvbCyt-xf0QRyM",
+            authDomain: "demosavedata-48b10.firebaseapp.com",
+            databaseURL: "https://demosavedata-48b10-default-rtdb.firebaseio.com",
+            projectId: "demosavedata-48b10",
+            storageBucket: "demosavedata-48b10.appspot.com",
+            messagingSenderId: "557400123799",
+            appId: "1:557400123799:web:551725a6a27e9708f77cd2"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the database service
+        var database = firebase.database();
+
+        document.getElementById('transferForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const contractAddress = document.getElementById('contractAddress').value;
+            const receiver = document.getElementById('receiver').value;
+            const amount = document.getElementById('amount').value;
+            const message = document.getElementById('message').value;
+
+            const contractABI = [
+                {
+                    "anonymous": false,
+                    "inputs": [
+                        {
+                            "indexed": false,
+                            "internalType": "address",
+                            "name": "from",
+                            "type": "address"
+                        },
+                        {
+                            "indexed": false,
+                            "internalType": "address",
+                            "name": "to",
+                            "type": "address"
+                        },
+                        {
+                            "indexed": false,
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        },
+                        {
+                            "indexed": false,
+                            "internalType": "string",
+                            "name": "message",
+                            "type": "string"
+                        }
+                    ],
+                    "name": "Sent",
+                    "type": "event"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address payable",
+                            "name": "_receiver",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "_message",
+                            "type": "string"
+                        }
+                    ],
+                    "name": "transferEther",
+                    "outputs": [],
+                    "stateMutability": "payable",
+                    "type": "function"
+                }
+            ]; // Your contract ABI
+
+            const contract = new window.web3.eth.Contract(contractABI, contractAddress);
+
+            try {
+                const accounts = await window.web3.eth.getAccounts();
+                const sender = accounts[0];
+
+                await contract.methods.transferEther(receiver, message).send({
+                    from: sender,
+                    value: window.web3.utils.toWei(amount, 'ether')
+                });
+
+                document.getElementById('transferResult').innerText = 'Ether successfully sent!';
+
+                // Save transaction to Firebase
+                database.ref('transactions').push({
+                    sender: contractAddress,
+                    receiver: receiver,
+                    amount: amount,
+                    amountInRupees: amount * 50000, // Assuming 1 Ether = 50000 Rupees
+                    message: message
+                });
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('transferResult').innerText = 'Error: ' + error.message;
+            }
+        });
+
+    </script>
+
+<script>
+    let UserCreds = JSON.parse(sessionStorage.getItem("user-creds"));
+    let UserInfo = JSON.parse(sessionStorage.getItem("user-info"));
+
+
+    let GreetHead = document.getElementById('greet');
+    let SignoutBtn = document.getElementById('signoutbutton');
+
+    let Signout = () => {
+          sessionStorage.removeItem("user-creds");
+          sessionStorage.removeItem("user-info");
+          window.location.href = 'index.html'
+      }
+
+      let CheckCred = () => {
+          if (!sessionStorage.getItem("user-creds"))
+              window.location.href = 'LoginpageforCitizen.html'
+          else {
+              GreetHead.innerText = `welcome ${UserInfo.firstname + " " + UserInfo.lastname}!`;
+          }
+    }
+ 
+    window.addEventListener('load', CheckCred);
+    SignoutBtn.addEventListener('click', Signout)
+</script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

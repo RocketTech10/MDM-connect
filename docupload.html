@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Display and Upload with Firebase</title>
+    <style>
+        .section {
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Image Upload Form -->
+    <div class="section">
+        <h2>Upload Image</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="imageInput" name="image" accept="image/*" multiple>
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+
+    <!-- Image Display Section -->
+    <div class="section">
+        <h2>Uploaded Images</h2>
+        <div id="uploadedImages"></div>
+    </div>
+
+    <!-- Firebase Configuration -->
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-storage.js"></script>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDa67UyAZnpERXtzwbKd2KaTT1FeDeXphA",
+            authDomain: "mdmc-a7d1b.firebaseapp.com",
+            databaseURL: "https://mdmc-a7d1b-default-rtdb.firebaseio.com",
+            projectId: "mdmc-a7d1b",
+            storageBucket: "mdmc-a7d1b.appspot.com",
+            messagingSenderId: "247962122538",
+            appId: "1:247962122538:web:3869b925ebe006ddc44653",
+            measurementId: "G-R5LTJRJPYW"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the storage service
+        const storage = firebase.storage();
+
+        // Function to display uploaded images
+        function displayImages(urls) {
+            const imagesDiv = document.getElementById('uploadedImages');
+            imagesDiv.innerHTML = '';
+
+            urls.forEach(function (url) {
+                const img = document.createElement('img');
+                img.src = url;
+                imagesDiv.appendChild(img);
+            });
+        }
+
+        // Function to fetch and display images from Firebase Storage
+        function fetchAndDisplayImages() {
+            storage.ref('images').listAll().then(function (result) {
+                const urls = [];
+
+                // Iterate through each item in the result
+                result.items.forEach(function (item) {
+                    // Get the download URL for each image
+                    item.getDownloadURL().then(function (url) {
+                        urls.push(url);
+
+                        // Display images once all URLs are fetched
+                        if (urls.length === result.items.length) {
+                            displayImages(urls);
+                        }
+                    });
+                });
+            }).catch(function (error) {
+                console.error("Error fetching images:", error);
+            });
+        }
+
+        // Add event listener for file input change
+        document.getElementById('uploadForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            const fileInput = document.getElementById('imageInput');
+            const files = fileInput.files;
+
+            // Upload each file to Firebase Storage
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const imageName = file.name;
+                const storageRef = storage.ref('images/' + imageName);
+
+                storageRef.put(file).then(function (snapshot) {
+                    console.log('Uploaded a file:', imageName);
+
+                    // After each upload, fetch and display images again
+                    fetchAndDisplayImages();
+                }).catch(function (error) {
+                    console.error('Error uploading file:', error);
+                });
+            }
+
+            // Clear the file input after upload
+            fileInput.value = '';
+        });
+
+        // Initially fetch and display images when the page loads
+        fetchAndDisplayImages();
+    </script>
+
+</body>
+
+</html>

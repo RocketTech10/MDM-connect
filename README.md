@@ -1,2 +1,1 @@
-# MDM-connect
-mid day meal scheme project
+# CodeCrafters-MDM-connect-
